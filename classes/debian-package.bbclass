@@ -12,6 +12,7 @@ DEBIAN_UNPACK_DIR ?= "${WORKDIR}/${BP}"
 S = "${DEBIAN_UNPACK_DIR}"
 DPV ?= "${PV}"
 DEBIAN_USE_SNAPSHOT ?= "0"
+DEBIAN_SNAPSHOT_SERIAL_DL ?= "0"
 DEBIAN_SDO_URL ?= "http://snapshot.debian.org"
 
 ###############################################################################
@@ -218,13 +219,23 @@ python () {
     def _get_sdo_json_data(path):
         import urllib.request
 
+        serial_dl = (d.getVar("DEBIAN_SNAPSHOT_SERIAL_DL", True) == "1")
+        if serial_dl:
+            lock_file_path = d.getVar('DL_DIR', True) + "/debian_snapshot.lock"
+            lf = bb.utils.lockfile(lock_file_path)
+
         base_url = d.getVar("DEBIAN_SDO_URL", True)
         try:
+            error = False
             readobj = urllib.request.urlopen(base_url + path)
         except urllib.error.URLError as e:
-            bb.fatal('Can not access to %s' % base_url + path)
+            error = True
             print(e.reason)
-        else:
+        finally:
+            if serial_dl:
+                bb.utils.unlockfile(lf)
+            if error:
+                bb.fatal('Can not access to %s' % base_url + path)
             return readobj.read()
 
     # get json data from snapshot.d.o or files
