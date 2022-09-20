@@ -5,9 +5,9 @@ REPACK_PV = "2.9.4+dfsg1"
 PV = "2.9.4"
 
 DEBIAN_SRC_URI = " \
-    ${DEBIAN_SECURITY_UPDATE_MIRROR}/main/libx/libxml2/libxml2_2.9.4+dfsg1-7+deb10u4.dsc;name=libxml2_2.9.4+dfsg1-7+deb10u4.dsc \
-    ${DEBIAN_SECURITY_UPDATE_MIRROR}/main/libx/libxml2/libxml2_2.9.4+dfsg1.orig.tar.xz;name=libxml2_2.9.4+dfsg1.orig.tar.xz \
-    ${DEBIAN_SECURITY_UPDATE_MIRROR}/main/libx/libxml2/libxml2_2.9.4+dfsg1-7+deb10u4.debian.tar.xz;name=libxml2_2.9.4+dfsg1-7+deb10u4.debian.tar.xz \
+    ${DEBIAN_MIRROR}/main/libx/libxml2/libxml2_2.9.4+dfsg1-7+deb10u4.dsc;name=libxml2_2.9.4+dfsg1-7+deb10u4.dsc \
+    ${DEBIAN_MIRROR}/main/libx/libxml2/libxml2_2.9.4+dfsg1.orig.tar.xz;name=libxml2_2.9.4+dfsg1.orig.tar.xz \
+    ${DEBIAN_MIRROR}/main/libx/libxml2/libxml2_2.9.4+dfsg1-7+deb10u4.debian.tar.xz;name=libxml2_2.9.4+dfsg1-7+deb10u4.debian.tar.xz \
 "
 
 SRC_URI[libxml2_2.9.4+dfsg1-7+deb10u4.dsc.md5sum] = "68375e62008b8e8ddd51b1e69ad2f495"
