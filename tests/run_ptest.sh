@@ -13,6 +13,8 @@ RESULT=$LOGDIR/result.ptest.txt
 mkdir -p $LOGDIR
 rm -f $RESULT
 
+echo "DEBUG: $(cat /proc/cmdline)"
+
 if [ "$TEST_PACKAGES" = "" ]; then
 	echo "TEST_PACKAGES is not defined. Get all available ptest package on board."
 	# Get all available ptest package on target machine

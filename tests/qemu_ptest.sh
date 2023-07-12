@@ -9,6 +9,7 @@
 #   TEST_MACHINES: machines will be tested. Eg: "qemux86 qemuarm"
 #   TEST_DISTRO_FEATURES: DISTRO_FEATURES will be used. Eg: "pam x11"
 #   TEST_ENABLE_SECURITY_UPDATE: If 1 is set, enable security update repository.
+#   TEST_QEMU_MEMORY: Specify memory size for qemu machine. Default: 512 KB
 
 trap "exit" INT
 trap 'kill $(jobs -p)' EXIT
@@ -88,6 +89,11 @@ for distro in $TEST_DISTROS; do
 
 		note "Testing machine $machine ..."
 		set_var "MACHINE" "$machine" conf/local.conf
+
+		if [ -n "$TEST_QEMU_MEMORY" ]; then
+			note "DEBUG: set 'QB_MEM_$machine = -m $TEST_QEMU_MEMORY' to conf/local.conf"
+			set_var "QB_MEM_$machine" "-m $TEST_QEMU_MEMORY" conf/local.conf
+		fi
 
 		bitbake core-image-minimal
 		if [ "$?" != "0" ]; then
