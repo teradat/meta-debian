@@ -68,8 +68,8 @@ for p in $TEST_PACKAGES; do
 	EXTRA_IMAGE_INSTALL="$EXTRA_IMAGE_INSTALL $p-ptest"
 done
 
-# we use ssh for calling ptest, so add dropbear
-set_var "IMAGE_INSTALL_append" " dropbear $EXTRA_IMAGE_INSTALL" conf/local.conf
+# we use ssh for calling ptest, so add dpkg and dropbear
+set_var "IMAGE_INSTALL_append" " dpkg dropbear $EXTRA_IMAGE_INSTALL" conf/local.conf
 
 for distro in $TEST_DISTROS; do
 	note "Testing distro $distro ..."
