@@ -47,6 +47,9 @@ for package in $TEST_PACKAGES; do
 	echo "$package $status" >> $RESULT
 done
 
+echo "DEBUG: "
+dpkg -l
+
 # Sort result file by alphabet
 sort -u $RESULT > result.tmp
 mv result.tmp $RESULT
