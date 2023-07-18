@@ -70,6 +70,7 @@ done
 
 # we use ssh for calling ptest, so add dpkg and dropbear
 set_var "IMAGE_INSTALL_append" " dpkg dropbear $EXTRA_IMAGE_INSTALL" conf/local.conf
+append_var "IMAGE_FEATURES" "package-management " conf/local.conf
 
 for distro in $TEST_DISTROS; do
 	note "Testing distro $distro ..."
