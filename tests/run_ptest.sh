@@ -48,7 +48,7 @@ for package in $TEST_PACKAGES; do
 done
 
 echo "DEBUG: "
-dpkg -l
+dpkg -l | cat
 
 # Sort result file by alphabet
 sort -u $RESULT > result.tmp
