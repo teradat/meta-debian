@@ -70,6 +70,7 @@ done
 
 # we use ssh for calling ptest, so add dpkg and dropbear
 set_var "IMAGE_INSTALL_append" " db gdbm lz4 udev dpkg dropbear $EXTRA_IMAGE_INSTALL" conf/local.conf
+set_var "IMAGE_INSTALL_remove" " eudev libcurl4 libpam libpam-runtime pam-plugin-deny pam-plugin-env pam-plugin-faildelay pam-plugin-group pam-plugin-lastlog pam-plugin-limits pam-plugin-mail pam-plugin-motd pam-plugin-nologin pam-plugin-permit pam-plugin-rootok pam-plugin-securetty pam-plugin-shells pam-plugin-unix pam-plugin-warn util-linux-runuser util-linux-su" conf/local.conf
 append_var "IMAGE_FEATURES" "package-management " conf/local.conf
 
 for distro in $TEST_DISTROS; do
@@ -96,6 +97,7 @@ for distro in $TEST_DISTROS; do
 			set_var "QB_MEM_$machine" "-m $TEST_QEMU_MEMORY" conf/local.conf
 		fi
 
+		note "DEBUG: local.conf: \n$(cat conf/local.conf)"
 		bitbake core-image-minimal
 		if [ "$?" != "0" ]; then
 			error "Failed to build image for $machine."

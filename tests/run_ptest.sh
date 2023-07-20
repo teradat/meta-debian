@@ -49,6 +49,7 @@ done
 
 echo "DEBUG: "
 dpkg -l | cat
+echo "DEBUG: $(free -h)"
 
 # Sort result file by alphabet
 sort -u $RESULT > result.tmp
