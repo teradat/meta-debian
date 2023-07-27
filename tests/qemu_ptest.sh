@@ -10,6 +10,7 @@
 #   TEST_DISTRO_FEATURES: DISTRO_FEATURES will be used. Eg: "pam x11"
 #   TEST_ENABLE_SECURITY_UPDATE: If 1 is set, enable security update repository.
 #   TEST_QEMU_MEMORY: Specify memory size for qemu machine. Default: 512 KB
+#   TEST_PREPARE_CMD: Preparatory script that runs before running ptest.
 
 trap "exit" INT
 trap 'kill $(jobs -p)' EXIT
@@ -123,6 +124,9 @@ for distro in $TEST_DISTROS; do
 
 		# Run ptest
 		scp_qemu $THISDIR/run_ptest.sh $TEST_USER@$TEST_IPADDR:/tmp/ > /dev/null
+		if [ "$TEST_PREPARE_CMD" != "" ]; then
+			ssh_qemu "$TEST_PREPARE_CMD"
+		fi
 		ssh_qemu "VERBOSE=$VERBOSE PTEST_RUNNER_TIMEOUT='$PTEST_RUNNER_TIMEOUT' TEST_PACKAGES='$TEST_PACKAGES' $EXTRA_ENV /tmp/run_ptest.sh"
 		scp_qemu $TEST_USER@$TEST_IPADDR:/tmp/ptest/* $LOGDIR/ > /dev/null
 
