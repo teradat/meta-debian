@@ -43,6 +43,7 @@ Input params from env:
 | TEST_DISTROS         | Distros will be tested.             | "deby deby-tiny"          |
 | TEST_MACHINES | Machines will be tested. Only qemu machine is supported. | "qemux86 qemuarm" |
 | TEST_DISTRO_FEATURES | DISTRO_FEATURES will be used.       | "pam x11"                 |
+| TEST_QEMU_MEMORY     | Specify memory(KB) for qemu machine.| "2048"                    |
 
 Example:
 ```sh
