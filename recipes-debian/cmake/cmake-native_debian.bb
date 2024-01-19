@@ -37,6 +37,10 @@ do_configure() {
 		-- ${CMAKE_EXTRACONF}
 }
 
+do_compile() {
+	oe_runmake
+}
+
 do_install() {
 	oe_runmake 'DESTDIR=${D}' install
 
