@@ -24,15 +24,22 @@ def fetch_Sources_gz(debian_mirror, debian_security_update_enabled, d):
     # DEBIAN_MIRROR is like http://ftp.debian.org/debian/pool
     # but we don't want a path with 'pool'
     if debian_security_update_enabled:
-        debian_mirror_nopool = debian_mirror.replace('/debian-security/pool/updates', '/debian-security')
+        if '/debian-security/pool/updates' in debian_mirror:
+            debian_mirror_nopool = debian_mirror.replace('/debian-security/pool/updates', '/debian-security')
+        if '/extended-lts/pool' in debian_mirror:
+            debian_mirror_nopool = debian_mirror.replace('/extended-lts/pool', '/extended-lts')
     else:
         debian_mirror_nopool = debian_mirror.replace('/debian/pool', '/debian')
 
     # Get checksum of Sources.gz from Release file
     bb.plain('Checking Debian Release ...')
     if debian_security_update_enabled:
-        release_file_url = '%s/dists/%s/updates/Release' % (
-            debian_mirror_nopool, debian_codename)
+        if 'debian-security' in debian_mirror_nopool:
+            release_file_url = '%s/dists/%s/updates/Release' % (
+                debian_mirror_nopool, debian_codename)
+        if 'extended-lts' in debian_mirror_nopool:
+            release_file_url = '%s/dists/%s-lts/Release' % (
+                debian_mirror_nopool, debian_codename)
     else:
         release_file_url = '%s/dists/%s/Release' % (
             debian_mirror_nopool, debian_codename)
@@ -40,8 +47,8 @@ def fetch_Sources_gz(debian_mirror, debian_security_update_enabled, d):
     release_file = urllib.request.urlopen(release_file_url).read()
     release_content = release_file.decode('utf-8').split('\n')
     md5sum_Source_gz = ''
+    sources_gz_line = r'^ \S{32}\s*\S+\s*main/source/Sources.gz'
     for line in release_content:
-        sources_gz_line = r'^ \S{32}\s*\S+\s*main/source/Sources.gz'
         if re.match(sources_gz_line, line):
             md5sum_Source_gz = line.split()[0]
 
@@ -62,8 +69,12 @@ def fetch_Sources_gz(debian_mirror, debian_security_update_enabled, d):
 
     # Get Sources.gz file
     if debian_security_update_enabled:
-        sources_gz = '%s/dists/%s/updates/main/source/Sources.gz;md5sum=%s' % (
-            debian_mirror_nopool, debian_codename, md5sum_Source_gz)
+        if 'debian-security' in debian_mirror_nopool:
+            sources_gz = '%s/dists/%s/updates/main/source/Sources.gz;md5sum=%s' % (
+                debian_mirror_nopool, debian_codename, md5sum_Source_gz)
+        if 'extended-lts' in debian_mirror_nopool:
+            sources_gz = '%s/dists/%s-lts/main/source/Sources.gz;md5sum=%s' % (
+                debian_mirror_nopool, debian_codename, md5sum_Source_gz)
     else:
         sources_gz = '%s/dists/%s/main/source/Sources.gz;md5sum=%s' % (
             debian_mirror_nopool, debian_codename, md5sum_Source_gz)
@@ -124,7 +135,10 @@ def save_to_file(old_pkg_dpv_map, package, dpv, pv, repack_pv, directory, files,
         source_info += 'REPACK_PV = "%s"\n' % repack_pv
         source_info += 'PV = "%s"\n' % pv
         if debian_security_update_enabled:
-            debian_uri = re.sub("^pool/updates/", "${DEBIAN_SECURITY_UPDATE_MIRROR}/", directory)
+            if "pool/updates/" in directory:
+                debian_uri = re.sub("^pool/updates/", "${DEBIAN_SECURITY_UPDATE_MIRROR}/", directory)
+            else:
+                debian_uri = re.sub("^pool/", "${DEBIAN_ELTS_SECURITY_UPDATE_MIRROR}/", directory)
         else:
             debian_uri = re.sub("^pool/", "${DEBIAN_MIRROR}/", directory)
         src_uri = 'DEBIAN_SRC_URI = " \\\n'
@@ -261,6 +275,14 @@ python debian_source_eventhandler() {
             'debian_security_update_enabled': True,
         })
         bb.warn('debian security update repository is enabled')
+
+        elts_update_mirror = d.getVar('DEBIAN_ELTS_SECURITY_UPDATE_MIRROR', True)
+        if elts_update_mirror is not None and elts_update_mirror != "":
+            update_targets.insert(0, {
+                'debian_mirror': elts_update_mirror,
+                'debian_security_update_enabled': True,
+            })
+            bb.warn('debian ELTS security update repository is enabled')
 
     debian_source_enabled = d.getVar('DEBIAN_SOURCE_ENABLED', True)
     if debian_source_enabled == '0':
