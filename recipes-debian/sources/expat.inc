@@ -5,9 +5,9 @@ REPACK_PV = "2.2.6"
 PV = "2.2.6"
 
 DEBIAN_SRC_URI = " \
-    ${DEBIAN_SECURITY_UPDATE_MIRROR}/main/e/expat/expat_2.2.6-2+deb10u7.dsc;name=expat_2.2.6-2+deb10u7.dsc \
-    ${DEBIAN_SECURITY_UPDATE_MIRROR}/main/e/expat/expat_2.2.6.orig.tar.gz;name=expat_2.2.6.orig.tar.gz \
-    ${DEBIAN_SECURITY_UPDATE_MIRROR}/main/e/expat/expat_2.2.6-2+deb10u7.debian.tar.xz;name=expat_2.2.6-2+deb10u7.debian.tar.xz \
+    ${DEBIAN_ELTS_SECURITY_UPDATE_MIRROR}/main/e/expat/expat_2.2.6-2+deb10u7.dsc;name=expat_2.2.6-2+deb10u7.dsc \
+    ${DEBIAN_ELTS_SECURITY_UPDATE_MIRROR}/main/e/expat/expat_2.2.6.orig.tar.gz;name=expat_2.2.6.orig.tar.gz \
+    ${DEBIAN_ELTS_SECURITY_UPDATE_MIRROR}/main/e/expat/expat_2.2.6-2+deb10u7.debian.tar.xz;name=expat_2.2.6-2+deb10u7.debian.tar.xz \
 "
 
 SRC_URI[expat_2.2.6-2+deb10u7.dsc.md5sum] = "b0ae8a37c637b9b49e02ec9de548fd45"

@@ -5,9 +5,9 @@ REPACK_PV = "2.33.1"
 PV = "2.33.1"
 
 DEBIAN_SRC_URI = " \
-    ${DEBIAN_SECURITY_UPDATE_MIRROR}/main/u/util-linux/util-linux_2.33.1-0.1+deb10u1.dsc;name=util-linux_2.33.1-0.1+deb10u1.dsc \
-    ${DEBIAN_SECURITY_UPDATE_MIRROR}/main/u/util-linux/util-linux_2.33.1.orig.tar.xz;name=util-linux_2.33.1.orig.tar.xz \
-    ${DEBIAN_SECURITY_UPDATE_MIRROR}/main/u/util-linux/util-linux_2.33.1-0.1+deb10u1.debian.tar.xz;name=util-linux_2.33.1-0.1+deb10u1.debian.tar.xz \
+    ${DEBIAN_ELTS_SECURITY_UPDATE_MIRROR}/main/u/util-linux/util-linux_2.33.1-0.1+deb10u1.dsc;name=util-linux_2.33.1-0.1+deb10u1.dsc \
+    ${DEBIAN_ELTS_SECURITY_UPDATE_MIRROR}/main/u/util-linux/util-linux_2.33.1.orig.tar.xz;name=util-linux_2.33.1.orig.tar.xz \
+    ${DEBIAN_ELTS_SECURITY_UPDATE_MIRROR}/main/u/util-linux/util-linux_2.33.1-0.1+deb10u1.debian.tar.xz;name=util-linux_2.33.1-0.1+deb10u1.debian.tar.xz \
 "
 
 SRC_URI[util-linux_2.33.1-0.1+deb10u1.dsc.md5sum] = "aa472fe037d9136de4b59110afb1a4d8"

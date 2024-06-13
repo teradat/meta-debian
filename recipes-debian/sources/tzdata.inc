@@ -5,9 +5,9 @@ REPACK_PV = "2024a"
 PV = "2024a"
 
 DEBIAN_SRC_URI = " \
-    ${DEBIAN_SECURITY_UPDATE_MIRROR}/main/t/tzdata/tzdata_2024a-0+deb10u1.dsc;name=tzdata_2024a-0+deb10u1.dsc \
-    ${DEBIAN_SECURITY_UPDATE_MIRROR}/main/t/tzdata/tzdata_2024a.orig.tar.gz;name=tzdata_2024a.orig.tar.gz \
-    ${DEBIAN_SECURITY_UPDATE_MIRROR}/main/t/tzdata/tzdata_2024a-0+deb10u1.debian.tar.xz;name=tzdata_2024a-0+deb10u1.debian.tar.xz \
+    ${DEBIAN_ELTS_SECURITY_UPDATE_MIRROR}/main/t/tzdata/tzdata_2024a-0+deb10u1.dsc;name=tzdata_2024a-0+deb10u1.dsc \
+    ${DEBIAN_ELTS_SECURITY_UPDATE_MIRROR}/main/t/tzdata/tzdata_2024a.orig.tar.gz;name=tzdata_2024a.orig.tar.gz \
+    ${DEBIAN_ELTS_SECURITY_UPDATE_MIRROR}/main/t/tzdata/tzdata_2024a-0+deb10u1.debian.tar.xz;name=tzdata_2024a-0+deb10u1.debian.tar.xz \
 "
 
 SRC_URI[tzdata_2024a-0+deb10u1.dsc.md5sum] = "38d42e93b6edbabd45d4d5f8550aa5e7"

@@ -5,9 +5,9 @@ REPACK_PV = "2.28"
 PV = "2.28"
 
 DEBIAN_SRC_URI = " \
-    ${DEBIAN_SECURITY_UPDATE_MIRROR}/main/g/glibc/glibc_2.28-10+deb10u3.dsc;name=glibc_2.28-10+deb10u3.dsc \
-    ${DEBIAN_SECURITY_UPDATE_MIRROR}/main/g/glibc/glibc_2.28.orig.tar.xz;name=glibc_2.28.orig.tar.xz \
-    ${DEBIAN_SECURITY_UPDATE_MIRROR}/main/g/glibc/glibc_2.28-10+deb10u3.debian.tar.xz;name=glibc_2.28-10+deb10u3.debian.tar.xz \
+    ${DEBIAN_ELTS_SECURITY_UPDATE_MIRROR}/main/g/glibc/glibc_2.28-10+deb10u3.dsc;name=glibc_2.28-10+deb10u3.dsc \
+    ${DEBIAN_ELTS_SECURITY_UPDATE_MIRROR}/main/g/glibc/glibc_2.28.orig.tar.xz;name=glibc_2.28.orig.tar.xz \
+    ${DEBIAN_ELTS_SECURITY_UPDATE_MIRROR}/main/g/glibc/glibc_2.28-10+deb10u3.debian.tar.xz;name=glibc_2.28-10+deb10u3.debian.tar.xz \
 "
 
 SRC_URI[glibc_2.28-10+deb10u3.dsc.md5sum] = "3cf31cd78b313daaf1f2729369e20096"
