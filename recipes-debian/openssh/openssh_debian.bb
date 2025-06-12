@@ -31,6 +31,7 @@ SRC_URI += " \
            file://fix-potential-signed-overflow-in-pointer-arithmatic.patch \
            file://sshd_check_keys \
            file://add-test-support-for-busybox.patch \
+           file://CVE-2025-32728.patch \
            "
 PAM_SRC_URI = "file://sshd"
 
