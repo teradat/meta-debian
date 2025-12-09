@@ -30,10 +30,21 @@ LINUX_GIT_PREFIX ??= ""
 LINUX_GIT_REPO ??= "linux-cip.git"
 LINUX_GIT_BRANCH ??= "linux-4.19.y-cip"
 LINUX_GIT_SRCREV ??= "${AUTOREV}"
+LINUX_VERSION ??= "4.19"
 
 SRC_URI = "${LINUX_GIT_URI}/${LINUX_GIT_PREFIX}${LINUX_GIT_REPO};branch=${LINUX_GIT_BRANCH};protocol=${LINUX_GIT_PROTOCOL}"
 
 SRCREV = "${LINUX_GIT_SRCREV}"
-PV = "git${SRCPV}"
+PV = "${LINUX_VERSION}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
+
+# use GITPKGVTAG for cve-check
+GITPKGV_TAG_REGEXP = "(.*)"
+GITPKGV_TAG_OPTION = "--abbrev=0"
+inherit gitpkgv
+do_cve_check[depends] += "virtual/kernel:do_fetch"
+CVE_VERSION ??= "${@oe.utils.conditional('LINUX_CIP_VERSION', '', d.getVar('PV'), d.getVar('LINUX_CIP_VERSION').split('-')[0].replace('v', ''), d)}"
+
+# If use cip_kernel, for kernel-cve-check
+LINUX_CIP_VERSION ??= "${@oe.utils.str_filter(r'(v\d.*-cip\d.*)', d.getVar('GITPKGVTAG'), d)}"
