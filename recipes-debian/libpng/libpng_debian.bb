@@ -33,6 +33,9 @@ FILES_${PN}-tools = "${bindir}/png-fix-itxt ${bindir}/pngfix ${bindir}/pngcp"
 SRC_URI += " \
     file://run-ptest \
 "
+do_debian_patch_append() {
+    chmod a+x ${S}/tests/*
+}
 
 do_compile_ptest() {
     oe_runmake check TESTS=""
@@ -80,6 +83,6 @@ do_install_ptest() {
         -exec rm -f {} \;
 }
 
-RDEPENDS_${PN}-ptest += "make gawk"
+RDEPENDS_${PN}-ptest += "make gawk bash"
 
 BBCLASSEXTEND = "native nativesdk"
